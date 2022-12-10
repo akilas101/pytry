@@ -1,5 +1,8 @@
 import time
 from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import Process
+# we can use the process class to launch a new process
 # def wanabeme():
 #     x = input('say my name')
 #     return x
@@ -25,20 +28,32 @@ complex_calculation()
 # we can import time and use it to time our processes
 print(f'single thread total time: {time.time() -start}')
 
-thread2 = Thread(target = complex_calculation)
+# # thread2 = Thread(target = complex_calculation)
 
-thread1 = Thread(target = ask_user)
-# thread1 = Thread(target = complex_calculation)
-# to show that if we ran two cpu tasking processes it will take the total time each would have used alone
+# # thread1 = Thread(target = ask_user)
+# # # thread1 = Thread(target = complex_calculation)
+# # # to show that if we ran two cpu tasking processes it will take the total time each would have used alone
+
+# # start = time.time()
+
+
+# # thread2.start()
+# # thread1.start()
+
+
+# # thread2.join()
+# # thread1.join()
+# with ThreadPoolExecutor(max_workers=2)as pool:
+#     pool.submit(complex_calculation)
+#     pool.submit(ask_user)
+
+# print(f'Two thread total time = {time.time() - start}')
+
+# multiprocessing
+process = Process(target = complex_calculation)
+process.start()
 
 start = time.time()
-
-
-thread2.start()
-thread1.start()
-
-
-thread2.join()
-thread1.join()
-
-print(f'Two thread total time = {time.time() - start}')
+ask_user()
+process.join()
+print(f'multiprocessing total time = {time.time() - start}')
