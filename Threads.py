@@ -2,6 +2,7 @@ import time
 from threading import Thread
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import Process
+import multiprocessing as mp
 # we can use the process class to launch a new process
 # def wanabeme():
 #     x = input('say my name')
@@ -50,10 +51,12 @@ print(f'single thread total time: {time.time() -start}')
 # print(f'Two thread total time = {time.time() - start}')
 
 # multiprocessing
-process = Process(target = complex_calculation)
-process.start()
+if __name__ == '__main__':
+ mp.set_start_method('spawn')
+ process = mp.Process(target = complex_calculation)
+ process.start()
 
-start = time.time()
-ask_user()
-process.join()
-print(f'multiprocessing total time = {time.time() - start}')
+ start = time.time()
+ ask_user()
+ process.join()
+ print(f'multiprocessing total time = {time.time() - start}')
