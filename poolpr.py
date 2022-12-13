@@ -2,6 +2,7 @@ import time
 from threading import Thread
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import Process, Pool
+from concurrent.futures import ProcessPoolExecutor
 import os
 
 # import multiprocessing as mp
@@ -78,6 +79,12 @@ print(f'single thread total time: {time.time() - start}')
 
 # def f(x):
 #     return x*x
+
+with ProcessPoolExecutor(max_workers=2) as pool:
+    pool.submit(complex_calculation)
+    pool.submit(complex_calculation)
+    
+
 
 if __name__ == '__main__':
    
